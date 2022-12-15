@@ -18,22 +18,19 @@ const TASKS = [
 
 const App = () => {
   const [taskData, setTaskData] = useState(TASKS);
+
   const updatesTaskData = (updatedTaskData) => {
-    const tasks = taskData.map(task => {
+    const tasks = taskData.map((task) => {
       if (task.id === updatedTaskData.id) {
         return updatedTaskData;
-      }
-      else {
+      } else {
         return task;
       }
     });
     setTaskData(tasks);
   };
   const deletesTask = (updatedTaskData) => {
-    const tasks = taskData.map((task) => {
-      if (task.id !== updatedTaskData.id) {
-        return task;
-      }});
+    const tasks = taskData.filter((task) => task.id !== updatedTaskData.id);
     setTaskData(tasks);
   };
 
@@ -43,7 +40,15 @@ const App = () => {
         <h1>Ada&apos;s Task List</h1>
       </header>
       <main>
-        <div>{<TaskList tasks={taskData} onIsComplete={updatesTaskData} onDelete={deletesTask}/>}</div>
+        <div>
+          {
+            <TaskList
+              tasks={taskData}
+              onIsComplete={updatesTaskData}
+              onDelete={deletesTask}
+            />
+          }
+        </div>
       </main>
     </div>
   );
