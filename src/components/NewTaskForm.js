@@ -51,10 +51,6 @@ const NewTaskForm = (props) => {
           onChange={onDescChange}
         />
       </div>
-      <div>
-        <label htmlFor="completed">Completion Date</label>
-        <input name="completed" value={formFields.isComplete} />
-      </div>
       <input type="submit" value="Add Task" />
     </form>
   );

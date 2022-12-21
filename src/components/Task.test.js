@@ -34,7 +34,7 @@ describe('Task', () => {
         onDeleteCallback={deleteCallback}
       />
     );
-
+    console.log(screen.getByText('Test Title'));
     screen.getByText('Test Title').click();
     screen.getByTestId('delete button 42').click();
 
