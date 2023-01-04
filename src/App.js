@@ -29,7 +29,6 @@ const App = () => {
         return task;
       }
     });
-    setTaskData(tasks);
     const taskId = updatedTaskData.id;
     if (updatedTaskData.isComplete === true) {
       axios
@@ -39,11 +38,11 @@ const App = () => {
             '/mark_complete'
         )
         .then(() => {
-          console.log('That worked!'), setTaskData(taskData);
+          setTaskData(tasks);
         })
         .catch((error) => {
-          console.log('Error Status Code:', error.response.status),
-            console.log('Error Message:', error.response.data);
+          console.log('Error Status Code:', error.response.status);
+          console.log('Error Message:', error.response.data);
         });
     }
     if (updatedTaskData.isComplete === false) {
@@ -54,11 +53,11 @@ const App = () => {
             '/mark_incomplete'
         )
         .then(() => {
-          console.log('That worked!'), setTaskData(taskData);
+          setTaskData(tasks);
         })
         .catch((error) => {
-          console.log('Error Status Code:', error.response.status),
-            console.log('Error Message:', error.response.data);
+          console.log('Error Status Code:', error.response.status);
+          console.log('Error Message:', error.response.data);
         });
     }
   };
@@ -89,25 +88,33 @@ const App = () => {
     axios
       .post('https://task-list-api-c17.herokuapp.com/tasks', newlyCreatedTask)
       .then(() => {
-        console.log('That worked!'), setTaskData(taskData);
+        console.log('That worked!');
+        setTaskData(newTaskList);
       })
       .catch((error) => {
-        console.log('Error Status Code:', error.response.status),
-          console.log('Error Message:', error.response.data);
+        console.log('Error Status Code:', error.response.status);
+        console.log('Error Message:', error.response.data);
       });
-    setTaskData(newTaskList);
   };
 
   useEffect(() => {
     axios
       .get('https://task-list-api-c17.herokuapp.com/tasks')
       .then((response) => {
-        setTaskData(response.data);
+        const newTaskList = response.data.map((task) => {
+          return {
+            id: task.id,
+            title: task.title,
+            description: task.description,
+            isComplete: task.is_complete,
+          };
+        });
+        setTaskData(newTaskList);
       })
       .catch(() => {
         console.log('This request could not go through');
       });
-  }, [taskData]);
+  }, []);
 
   return (
     <div className="App">

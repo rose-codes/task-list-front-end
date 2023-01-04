@@ -5,7 +5,7 @@ const NewTaskForm = (props) => {
   const [formFields, setFormFields] = useState({
     title: '',
     description: '',
-    isComplete: '',
+    isComplete: false,
   });
 
   const onTitleChange = (event) => {
@@ -34,7 +34,7 @@ const NewTaskForm = (props) => {
     setFormFields({
       title: '',
       description: '',
-      isComplete: 'false',
+      isComplete: false,
     });
   };
   return (
@@ -50,10 +50,6 @@ const NewTaskForm = (props) => {
           value={formFields.description}
           onChange={onDescChange}
         />
-      </div>
-      <div>
-        <label htmlFor="completed">Completion Date</label>
-        <input name="completed" value={formFields.isComplete} />
       </div>
       <input type="submit" value="Add Task" />
     </form>

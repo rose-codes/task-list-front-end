@@ -30,15 +30,18 @@ const Task = (props) => {
     <li className="tasks__item">
       <button
         className={`tasks__item__toggle ${buttonClass}`}
-        onClick={() => completeTaskButtonClick()}
+        onClick={() => {
+          completeTaskButtonClick();
+        }}
       >
         {props.title}
       </button>
       <button
+        data-testid={`delete button ${props.id}`}
         className="tasks__item__remove button"
         onClick={() => deleteTaskButtonClick()}
       >
-        x
+        X
       </button>
     </li>
   );
